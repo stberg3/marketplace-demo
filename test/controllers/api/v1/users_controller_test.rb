@@ -12,4 +12,9 @@ class Api::V1::UsersControllerTest < ActionDispatch::IntegrationTest
       json_response = JSON.parse(self.response.body)
       assert_equal @user.email, json_response["email"]
   end
+
+  test "doesn't know POST" do
+    post api_v1_user_url(@user), as: :json
+    assert_response :not_found
+  end
 end
