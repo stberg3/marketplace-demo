@@ -17,4 +17,12 @@ class UserTest < ActiveSupport::TestCase
     user = User.new(email: other_user.email, password_digest: "test")
     assert_not user.valid?
   end
+
+
+  test "user with an empty password should be invalid" do
+    [ "", " " ].each do |password|
+      user = User.new(email: "him@her", password_digest: password)
+      assert_not user.valid?
+    end
+  end
 end
